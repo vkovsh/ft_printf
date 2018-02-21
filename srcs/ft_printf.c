@@ -1,25 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/02/21 15:59:20 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/02/21 18:24:54 by vkovsh           ###   ########.fr       */
+/*   Created: 2018/02/21 17:11:18 by vkovsh            #+#    #+#             */
+/*   Updated: 2018/02/21 18:27:54 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
-# include "libft.h"
-# include <stdarg.h>
+#include "ft_printf.h"
 
-typedef struct	s_value
+//t_list		*
+int			ft_printf(const char *format, ...)
 {
-	int			spec;
-	void		*value;
-}				t_value;
+	va_list	argptr;
 
-int		ft_printf(const char *format, ...);
-#endif
+	va_start(argptr, format);
+	/*
+	while (num--)
+		sum += va_arg(argptr, double);*/
+	va_end(argptr);
+	return (0);
+}
