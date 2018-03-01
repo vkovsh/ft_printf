@@ -13,6 +13,7 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 # include <string.h>
+# include <limits.h>
 # define BUFF_SIZE 32
 
 typedef struct		s_list
@@ -160,4 +161,8 @@ int					ft_ishex(char c);
 int					ft_arehex(char *hex);
 
 void				ft_lstrev(t_list **const lst);
+
+char				*ft_lltoa(long long n);
+
+char				*ft_lltoa_base(unsigned long long n, int base);
 #endif

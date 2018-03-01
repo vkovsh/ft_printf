@@ -86,7 +86,9 @@ SRC		= 	ft_islow.c 		\
 			ft_lstcount.c	\
 			get_next_line.c	\
 			ft_ishex.c		\
-			ft_arehex.c
+			ft_arehex.c 	\
+			ft_lltoa.c 		\
+			ft_lltoa_base.c
 
 OBJ	=	$(SRC:.c=.o)
 

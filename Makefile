@@ -17,7 +17,7 @@ CC_FLAGS 	=	-Wall -Werror -Wextra
 
 SRC_PATH 	=	./srcs/
 
-INC_PATH	=	./includes/ $(LIBFT_PATH)/includes/
+INC_PATH	=	./includes/ $(LIBFT_PATH)includes/
 OBJ_PATH	=	./obj/
 LIBFT_PATH	=	./libft/
 
@@ -29,13 +29,15 @@ INC			=	$(addprefix -I, $(INC_PATH))
 
 OBJ_NAME	=	$(SRC_NAME:.c=.o)
 
-SRC_NAME	=	ft_printf.c
+SRC_NAME	=	ft_printf.c 	\
+				get_spec.c 		\
+				format_value.c
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	@make -C $(LIBFT_PATH)
-	@ar rc $@ $^ $(LIBFT)
+	@ar rc $@ $^
 	@ranlib $@
 	@echo "Compiling" [ $(NAME) ]
 

@@ -18,7 +18,7 @@ char		*ft_strtolower(char const *s)
 	char	*res;
 
 	len = ft_strlen(s);
-	res = ft_strnew(len + 1);
+	res = ft_strnew(len);
 	while (len--)
 		res[len] = ft_tolower(s[len]);
 	return (res);

@@ -48,10 +48,8 @@ static void			ft_cut(t_list *entry, int split)
 static int			ft_copyuntil(char **line, t_list *entry, char c)
 {
 	int				i;
-	int				count;
 
 	i = -1;
-	count = 0;
 	while (((char *)(entry->content))[++i])
 		if (((char *)(entry->content))[i] == c)
 			break ;
