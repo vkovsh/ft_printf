@@ -6,7 +6,7 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 17:11:18 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/02 03:59:42 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/02 04:54:25 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,10 @@ void			set_value(t_pfargs *pf)
 		join_value(&(pf->output), ft_itoa(va_arg(pf->argptr, int)), pf->spec);
 	else if (pf->spec.type == D)
 		join_value(&(pf->output), ft_lltoa_base(va_arg(pf->argptr, long long int), 10), pf->spec);
+	else if (pf->spec.type == u)
+		join_value(&(pf->output), ft_itoa(va_arg(pf->argptr, unsigned int)), pf->spec);
+	else if (pf->spec.type == U)
+		join_value(&(pf->output), ft_lltoa_base(va_arg(pf->argptr, unsigned long long), 10), pf->spec);
 	else if (pf->spec.type == c)
 		join_value(&(pf->output), init_min_str(va_arg(pf->argptr, int)), pf->spec);
 	else if (pf->spec.type == s)
