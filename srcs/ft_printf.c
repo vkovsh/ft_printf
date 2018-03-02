@@ -6,7 +6,7 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 17:11:18 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/02/21 18:27:54 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/02 03:59:42 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,7 @@ static void		parse_specs(char *format, t_list **parsed_values)
 	{
 		sp = (t_value *)malloc(sizeof(t_value));
 		sp->spec = get_spec(&bytes[b_counter]);
-		/*
-		printf("f1: %d %d %d %d %d %d %d, w: %d, p: %d, f2: %d t: %c\n",
+		/*printf("f1: %d %d %d %d %d %d %d, w: %d, p: %d, f2: %d t: %c\n",
 			sp->spec.sharp_flag,
 			sp->spec.zero_flag,
 			sp->spec.minus_flag,
@@ -57,8 +56,7 @@ static void		parse_specs(char *format, t_list **parsed_values)
 			sp->spec.width,
 			sp->spec.precision,
 			sp->spec.flag2,
-			sp->spec.type);
-		*/
+			sp->spec.type);*/
 		sp->value = NULL;
 		ft_lstadd(parsed_values, ft_lstnew(sp, sizeof(t_value)));
 		free(sp);
@@ -109,6 +107,47 @@ void			init_list(const char *format, t_list **t, char **output)
 	ft_lstrev(t);
 }
 
+void			check_asterisk(t_pfargs *pf)
+{
+	pf->spec.width = (pf->spec.asterisk_width) ? va_arg(pf->argptr, int) : pf->spec.width;
+	pf->spec.precision = (pf->spec.asterisk_precision) ? va_arg(pf->argptr, int) : pf->spec.precision;
+}
+
+void			set_spec(t_pfargs *pf)
+{
+	pf->spec = ((t_value *)((pf->t)->content))->spec;
+}
+
+void			set_value(t_pfargs *pf)
+{
+	if (pf->spec.type == T)
+		join_value(&(pf->output), ((t_value *)((pf->t)->content))->value, pf->spec);
+	else if (pf->spec.type == d || pf->spec.type == i)
+		join_value(&(pf->output), ft_itoa(va_arg(pf->argptr, int)), pf->spec);
+	else if (pf->spec.type == D)
+		join_value(&(pf->output), ft_lltoa_base(va_arg(pf->argptr, long long int), 10), pf->spec);
+	else if (pf->spec.type == c)
+		join_value(&(pf->output), init_min_str(va_arg(pf->argptr, int)), pf->spec);
+	else if (pf->spec.type == s)
+		join_value(&(pf->output), va_arg(pf->argptr, char *), pf->spec);
+	else if (pf->spec.type == PERCENT)
+		pf->output = ft_strjoin(pf->output, "\045");
+	else if (pf->spec.type == X)
+		join_value(&(pf->output), ft_lltoa_base(va_arg(pf->argptr, unsigned long long), 16), pf->spec);
+	else if (pf->spec.type == x)
+		join_value(&(pf->output), ft_strtolower(ft_lltoa_base((int)va_arg(pf->argptr, unsigned long long), 16)), pf->spec);
+	else if (pf->spec.type == o)
+		join_value(&(pf->output), ft_lltoa_base((int)va_arg(pf->argptr, unsigned long long), 8), pf->spec);
+	else if (pf->spec.type == O)
+		join_value(&(pf->output), ft_lltoa_base(va_arg(pf->argptr, unsigned long long), 8), pf->spec);
+	else if (pf->spec.type == b)
+		join_value(&(pf->output), ft_lltoa_base((int)va_arg(pf->argptr, unsigned long long), 2), pf->spec);
+	else if (pf->spec.type == B)
+		join_value(&(pf->output), ft_lltoa_base(va_arg(pf->argptr, unsigned long long), 2), pf->spec);
+	else if (pf->spec.type == p)
+		join_value(&(pf->output), ft_strtolower(ft_lltoa_base(va_arg(pf->argptr, unsigned long long), 16)), pf->spec);
+}
+
 int				ft_printf(const char *format, ...)
 {
 	t_pfargs	pf;
@@ -119,27 +158,9 @@ int				ft_printf(const char *format, ...)
 	va_start(pf.argptr, format);
 	while (pf.t)
 	{
-		pf.spec = ((t_value *)((pf.t)->content))->spec;
-		pf.spec.width = (pf.spec.asterisk_width) ? va_arg(pf.argptr, int) : pf.spec.width;
-		pf.spec.precision = (pf.spec.asterisk_precision) ? va_arg(pf.argptr, int) : pf.spec.precision;
-		if (pf.spec.type == T)
-			join_value(&(pf.output), ((t_value *)((pf.t)->content))->value, pf.spec);
-		else if (pf.spec.type == d || pf.spec.type == i)
-			join_value(&(pf.output), ft_itoa(va_arg(pf.argptr, int)), pf.spec);
-		else if (pf.spec.type == c)
-			join_value(&(pf.output), init_min_str(va_arg(pf.argptr, int)), pf.spec);
-		else if (pf.spec.type == s)
-			join_value(&(pf.output), va_arg(pf.argptr, char *), pf.spec);
-		else if (pf.spec.type == PERCENT)
-			pf.output = ft_strjoin(pf.output, "\045");
-		else if (pf.spec.type == X)
-			join_value(&(pf.output), ft_lltoa_base(va_arg(pf.argptr, long long), 16), pf.spec);
-		else if (pf.spec.type == x)
-			join_value(&(pf.output), ft_strtolower(ft_lltoa_base(va_arg(pf.argptr, long long), 16)), pf.spec);
-		else if (pf.spec.type == o)
-			join_value(&(pf.output), ft_lltoa_base(va_arg(pf.argptr, long long), 8), pf.spec);
-		else if (pf.spec.type == b)
-			join_value(&(pf.output), ft_lltoa_base(va_arg(pf.argptr, long long), 2), pf.spec);
+		set_spec(&pf);
+		check_asterisk(&pf);
+		set_value(&pf);
 		pf.t = (pf.t)->next;
 	}
 	va_end(pf.argptr);

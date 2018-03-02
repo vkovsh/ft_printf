@@ -5,7 +5,7 @@
 
 int		main(void)
 {
-	ft_printf("example: %#*.*X, %#*.*x, %#*.10o\n", 30, 10, 'z', 30, 10, 'z', 30, 'z');
-	printf("example: %#*.*X, %#*.*x, %#*.10o\n", 30, 10, 'z', 30, 10, 'z', 30, 'z');
+	ft_printf("example: %p\n", &ft_printf);
+	printf("example: %p\n", &ft_printf);
 	return (0);
 }
