@@ -21,7 +21,7 @@ INC_PATH	=	./includes/ $(LIBFT_PATH)includes/
 OBJ_PATH	=	./obj/
 LIBFT_PATH	=	./libft/
 
-LIBFT		=	$(LIBFT_PATH)libft.a
+LIBFT		=	-L $(LIBFT_PATH) -lft
 
 OBJ			=	$(addprefix $(OBJ_PATH),$(OBJ_NAME))
 

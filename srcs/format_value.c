@@ -73,13 +73,11 @@ static void	set_precision(char **value, t_spec spec)
 
 void		join_value(char **output, char *value, t_spec spec)
 {
-	if (spec.type != T && spec.type != p)
+	if (spec.type != T)
 	{
 		set_precision(&value, spec);
 		set_sharp(&value, spec);
 		set_width(&value, spec);
 	}
-	else if (spec.type == p)
-		value = ft_strjoin("0x", value);
 	*output = ft_strjoin(*output, value);
 }

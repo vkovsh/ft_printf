@@ -5,7 +5,7 @@
 
 int		main(void)
 {
-	ft_printf("example: %p\n", &ft_printf);
-	printf("example: %p\n", &ft_printf);
+	ft_printf("example: %20p\n", &ft_printf);
+	printf("example: %20p\n", &ft_printf);
 	return (0);
 }
