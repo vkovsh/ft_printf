@@ -125,7 +125,7 @@ void			set_value(t_pfargs *pf)
 	else if (pf->spec.type == d || pf->spec.type == i)
 		join_value(&(pf->output), ft_itoa(va_arg(pf->argptr, int)), pf->spec);
 	else if (pf->spec.type == D)
-		join_value(&(pf->output), ft_lltoa_base(va_arg(pf->argptr, long long int), 10), pf->spec);
+		join_value(&(pf->output), ft_lltoa(va_arg(pf->argptr, long long int)), pf->spec);
 	else if (pf->spec.type == u)
 		join_value(&(pf->output), ft_itoa(va_arg(pf->argptr, unsigned int)), pf->spec);
 	else if (pf->spec.type == U)
@@ -149,9 +149,7 @@ void			set_value(t_pfargs *pf)
 	else if (pf->spec.type == B)
 		join_value(&(pf->output), ft_lltoa_base(va_arg(pf->argptr, unsigned long long), 2), pf->spec);
 	else if (pf->spec.type == p)
-	{
 		join_value(&(pf->output), ft_strjoin("0x", ft_strtolower(ft_lltoa_base(va_arg(pf->argptr, unsigned long long), 16))), pf->spec);
-	}
 }
 
 int				ft_printf(const char *format, ...)
