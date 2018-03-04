@@ -31,7 +31,8 @@ OBJ_NAME	+=	$(LIBFT_NAME:.c=.o)
 
 SRC_NAME	=	ft_printf.c 	\
 				get_spec.c 		\
-				format_value.c
+				format_value.c 	\
+				ft_ansi.c
 
 LIBFT_NAME	=	ft_islow.c 		\
 				ft_lstrev.c		\

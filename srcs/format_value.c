@@ -51,12 +51,22 @@ static void	set_sharp(char **value, t_spec spec)
 	}
 }
 
+t_bool			is_numeric_type(t_type t)
+{
+	if (t == i || t == d ||
+		t == u || t == o ||
+		t == x || t == X ||
+		t == b)
+		return (TRUE);
+	return (FALSE);
+}
+
 static void	set_precision(char **value, t_spec spec)
 {
 	char	*zeros;
 	int		length;
 
-	if (spec.type == d || spec.type == x || spec.type == X || spec.type == o || spec.type == b)
+	if (is_numeric_type(spec.type))
 	{
 		if (spec.precision)
 		{
@@ -66,8 +76,34 @@ static void	set_precision(char **value, t_spec spec)
 				zeros = ft_strnew(spec.precision - length);
 				ft_memset(zeros, '0', spec.precision - length);
 				*value = ft_strjoin(zeros, *value);
+			}
 		}
 	}
+	else if (spec.type == s)
+	{
+		if (spec.precision > 0)
+		{
+			if (spec.precision < (int)ft_strlen(*value))
+			{
+				char *h = ft_strnew(spec.precision);
+				ft_memmove(h, *value, spec.precision);
+				*value = h;
+			}
+		}
+	}
+}
+
+static void		set_color(char **value, t_spec spec)
+{
+	char 		*color;
+
+	if (spec.color.r || spec.color.g || spec.color.b)
+	{
+		color = ft_strjoin("\x1b[38;2;", ft_strjoin(ft_itoa(spec.color.r), ";"));
+		color = ft_strjoin(color, ft_strjoin(ft_itoa(spec.color.g), ";"));
+		color = ft_strjoin(color, ft_strjoin(ft_itoa(spec.color.b), "m"));
+		*value = ft_strjoin(color, *value);
+		*value = ft_strjoin(*value, "\x1b[0m");
 	}
 }
 
@@ -77,6 +113,7 @@ void		join_value(char **output, char *value, t_spec spec)
 	{
 		set_precision(&value, spec);
 		set_sharp(&value, spec);
+		set_color(&value, spec);
 		set_width(&value, spec);
 	}
 	*output = ft_strjoin(*output, value);

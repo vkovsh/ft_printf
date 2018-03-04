@@ -61,8 +61,16 @@ typedef enum 		e_type
 	PERCENT = '\033'
 }					t_type;
 
+typedef struct  	s_color
+{
+	unsigned char 	r;
+	unsigned char 	g;
+	unsigned char 	b;	
+}					t_color;
+
 typedef struct  	s_spec
 {
+	struct s_color 	color;
 	enum e_bool		sharp_flag;
 	enum e_bool		zero_flag;
 	enum e_bool		minus_flag;
@@ -70,6 +78,7 @@ typedef struct  	s_spec
 	enum e_bool		space_flag;
 	enum e_bool 	asterisk_width;
 	enum e_bool 	asterisk_precision;
+	enum e_bool 	asterisk_color;
 	int				width;
 	int				precision;
 	enum e_flag2	flag2;	
@@ -96,4 +105,6 @@ int					ft_printf(const char *format, ...);
 t_spec				get_spec(char **txt_pointer);
 
 void				join_value(char **output, char *value, t_spec spec);
+
+char				*ft_wstr_to_str(wchar_t *ws);
 #endif
