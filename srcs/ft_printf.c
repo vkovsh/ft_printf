@@ -73,6 +73,7 @@ static void		parse_specs(char *format, t_list **parsed_values)
 			sp->spec.asterisk_width = FALSE;
 			sp->spec.asterisk_precision = FALSE;
 			sp->spec.asterisk_color = FALSE;
+			sp->spec.asterisk_background = FALSE;
 			sp->spec.width = 0;
 			sp->spec.precision = 1;
 			len = ft_strlen((char *)(bytes[b_counter]));
@@ -131,6 +132,15 @@ void			check_asterisk(t_pfargs *pf)
 		color.b = (unsigned char)color_nbr;
 		pf->spec.color = color;
 	}
+	if (pf->spec.asterisk_background)
+	{
+		color_nbr = va_arg(pf->argptr, int);
+		color.r = (unsigned char)(color_nbr >> 16);
+		color.g = (unsigned char)((color_nbr << 16) >> 24);
+		color.b = (unsigned char)color_nbr;
+		pf->spec.background = color;
+	}
+
 }
 
 void			set_spec(t_pfargs *pf)
@@ -138,12 +148,12 @@ void			set_spec(t_pfargs *pf)
 	pf->spec = ((t_value *)((pf->t)->content))->spec;
 }
 
-void				set_signed_decimal(t_pfargs *pf)
+void					set_signed_decimal(t_pfargs *pf)
 {
-	long long int 	decimal;
+	long long int 		decimal;
 
 	decimal = va_arg(pf->argptr, long long int);
-	if (pf->spec.flag2 == IGNORE2)
+	if (pf->spec.flag2 == IGNORE2 && pf->spec.type != D)
 		join_value(&(pf->output), ft_lltoa((int)decimal), pf->spec);
 	else if (pf->spec.flag2 == h)
 		join_value(&(pf->output), ft_lltoa((short int)decimal), pf->spec);
@@ -152,6 +162,37 @@ void				set_signed_decimal(t_pfargs *pf)
 	else if (pf->spec.flag2 == ll || pf->spec.type == D)
 		join_value(&(pf->output), ft_lltoa(decimal), pf->spec);
 }
+/*
+void 						set_unsigned_value(t_pfargs *pf)
+{
+	unsigned long long int 	uns_value;
+
+	uns_value = va_arg(pf->argptr, unsigned long long int);
+	if (pf->spec.flag2 == h)
+	{
+		uns_value = (unsigned short int)uns_value;
+		if (pf->spec.type == u || pf->spec.type == U)
+			join_value(&(pf->output), ft_itoa(uns_value), pf->spec);
+		else if (pf->spec.type == o || pf->spec.type == O)
+			join_value(&(pf->output), ft_lltoa_base(uns_value, 8), pf->spec);
+		else if (pf->spec.type == b || pf->spec.type == B)
+			join_value(&(pf->output), ft_lltoa_base(uns_value, 2), pf->spec);
+		else if (pf->spec.type == x || pf->spec.type == X)
+			join_value(&(pf->output), ft_lltoa_base(uns_value, 16), pf->spec);
+	}
+	else if (pf->)*/
+	/*
+	else (pf->)
+
+	if (pf->spec.type == u)
+	{
+
+	}
+	else if (pf->spec.type == U)
+	{
+
+	}*/
+//}
 
 void			set_value(t_pfargs *pf)
 {
@@ -159,10 +200,22 @@ void			set_value(t_pfargs *pf)
 		join_value(&(pf->output), ((t_value *)((pf->t)->content))->value, pf->spec);
 	else if (pf->spec.type == S)
 		join_value(&(pf->output), ft_wstr_to_str(va_arg(pf->argptr, wchar_t *)), pf->spec);
+	else if (pf->spec.type == C)
+	{
+		wchar_t wc = va_arg(pf->argptr, wchar_t);
+		join_value(&(pf->output), ft_wstr_to_str(&wc), pf->spec);
+	}
 	else if (pf->spec.type == d || pf->spec.type == i || pf->spec.type == D)
 	{
 		set_signed_decimal(pf);
 	}
+	/*
+	else if (pf->spec.type == u || pf->spec.type == U || pf->spec.type == x ||
+		pf->spec.type == X || pf->spec.type == o || pf->spec.type == O ||
+		pf->spec.type == B || pf->spec->type == b)
+	{
+		set_unsigned_value(pf);
+	}*/
 	else if (pf->spec.type == u)
 		join_value(&(pf->output), ft_itoa(va_arg(pf->argptr, unsigned int)), pf->spec);
 	else if (pf->spec.type == U)
@@ -201,7 +254,11 @@ int				ft_printf(const char *format, ...)
 	{
 		set_spec(&pf);
 		check_asterisk(&pf);
-		/*printf("rgb: %x %x %x asterisk: %d f1: %d %d %d %d %d %d %d, w: %d, p: %d, f2: %d t: %c\n",
+		/*printf("back: %x%x%x asterisk: %d rgb: %x%x%x asterisk: %d f1: %d %d %d %d %d %d %d, w: %d, p: %d, f2: %d t: %c\n",
+			pf.spec.background.r,
+			pf.spec.background.g,
+			pf.spec.background.b,
+			pf.spec.asterisk_background,
 			pf.spec.color.r,
 			pf.spec.color.g,
 			pf.spec.color.b,

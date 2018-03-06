@@ -71,6 +71,7 @@ typedef struct  	s_color
 typedef struct  	s_spec
 {
 	struct s_color 	color;
+	struct s_color 	background;
 	enum e_bool		sharp_flag;
 	enum e_bool		zero_flag;
 	enum e_bool		minus_flag;
@@ -79,6 +80,7 @@ typedef struct  	s_spec
 	enum e_bool 	asterisk_width;
 	enum e_bool 	asterisk_precision;
 	enum e_bool 	asterisk_color;
+	enum e_bool 	asterisk_background;
 	int				width;
 	int				precision;
 	enum e_flag2	flag2;	
