@@ -6,7 +6,7 @@
 #    By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/16 19:36:03 by vkovsh            #+#    #+#              #
-#    Updated: 2018/02/21 18:28:12 by vkovsh           ###   ########.fr        #
+#    Updated: 2018/03/06 17:47:55 by vkovsh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,10 +29,12 @@ OBJ_NAME	=	$(SRC_NAME:.c=.o)
 
 OBJ_NAME	+=	$(LIBFT_NAME:.c=.o)
 
-SRC_NAME	=	ft_printf.c 	\
-				get_spec.c 		\
-				format_value.c 	\
-				ft_ansi.c
+SRC_NAME	=	ft_printf.c 			\
+				get_spec.c 				\
+				format_value.c 			\
+				ft_ansi.c				\
+				set_signed_decimal.c	\
+				set_unsigned_value.c
 
 LIBFT_NAME	=	ft_islow.c 		\
 				ft_lstrev.c		\
@@ -104,7 +106,8 @@ LIBFT_NAME	=	ft_islow.c 		\
 				ft_ishex.c		\
 				ft_arehex.c 	\
 				ft_lltoa.c 		\
-				ft_lltoa_base.c
+				ft_ulltoa_base.c	\
+				ft_ulltoa.c
 
 all: $(NAME)
 

@@ -6,7 +6,7 @@
 #    By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/25 10:21:28 by vkovsh            #+#    #+#              #
-#    Updated: 2018/02/17 18:58:19 by vkovsh           ###   ########.fr        #
+#    Updated: 2018/03/06 11:58:40 by vkovsh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,7 +88,8 @@ SRC		= 	ft_islow.c 		\
 			ft_ishex.c		\
 			ft_arehex.c 	\
 			ft_lltoa.c 		\
-			ft_lltoa_base.c
+			ft_ulltoa_base.c	\
+			ft_ulltoa.c
 
 OBJ	=	$(SRC:.c=.o)
 

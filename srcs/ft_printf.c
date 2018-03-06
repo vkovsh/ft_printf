@@ -6,7 +6,7 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 17:11:18 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/02 04:54:25 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/06 17:35:51 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,52 +148,6 @@ void			set_spec(t_pfargs *pf)
 	pf->spec = ((t_value *)((pf->t)->content))->spec;
 }
 
-void					set_signed_decimal(t_pfargs *pf)
-{
-	long long int 		decimal;
-
-	decimal = va_arg(pf->argptr, long long int);
-	if (pf->spec.flag2 == IGNORE2 && pf->spec.type != D)
-		join_value(&(pf->output), ft_lltoa((int)decimal), pf->spec);
-	else if (pf->spec.flag2 == h)
-		join_value(&(pf->output), ft_lltoa((short int)decimal), pf->spec);
-	else if (pf->spec.flag2 == l)
-		join_value(&(pf->output), ft_lltoa((long int)decimal), pf->spec);
-	else if (pf->spec.flag2 == ll || pf->spec.type == D)
-		join_value(&(pf->output), ft_lltoa(decimal), pf->spec);
-}
-/*
-void 						set_unsigned_value(t_pfargs *pf)
-{
-	unsigned long long int 	uns_value;
-
-	uns_value = va_arg(pf->argptr, unsigned long long int);
-	if (pf->spec.flag2 == h)
-	{
-		uns_value = (unsigned short int)uns_value;
-		if (pf->spec.type == u || pf->spec.type == U)
-			join_value(&(pf->output), ft_itoa(uns_value), pf->spec);
-		else if (pf->spec.type == o || pf->spec.type == O)
-			join_value(&(pf->output), ft_lltoa_base(uns_value, 8), pf->spec);
-		else if (pf->spec.type == b || pf->spec.type == B)
-			join_value(&(pf->output), ft_lltoa_base(uns_value, 2), pf->spec);
-		else if (pf->spec.type == x || pf->spec.type == X)
-			join_value(&(pf->output), ft_lltoa_base(uns_value, 16), pf->spec);
-	}
-	else if (pf->)*/
-	/*
-	else (pf->)
-
-	if (pf->spec.type == u)
-	{
-
-	}
-	else if (pf->spec.type == U)
-	{
-
-	}*/
-//}
-
 void			set_value(t_pfargs *pf)
 {
 	if (pf->spec.type == T)
@@ -206,40 +160,26 @@ void			set_value(t_pfargs *pf)
 		join_value(&(pf->output), ft_wstr_to_str(&wc), pf->spec);
 	}
 	else if (pf->spec.type == d || pf->spec.type == i || pf->spec.type == D)
-	{
 		set_signed_decimal(pf);
-	}
-	/*
 	else if (pf->spec.type == u || pf->spec.type == U || pf->spec.type == x ||
 		pf->spec.type == X || pf->spec.type == o || pf->spec.type == O ||
-		pf->spec.type == B || pf->spec->type == b)
+		pf->spec.type == B || pf->spec.type == b)
 	{
 		set_unsigned_value(pf);
-	}*/
-	else if (pf->spec.type == u)
-		join_value(&(pf->output), ft_itoa(va_arg(pf->argptr, unsigned int)), pf->spec);
-	else if (pf->spec.type == U)
-		join_value(&(pf->output), ft_lltoa_base(va_arg(pf->argptr, unsigned long long), 10), pf->spec);
+	}
 	else if (pf->spec.type == c)
 		join_value(&(pf->output), init_min_str(va_arg(pf->argptr, int)), pf->spec);
 	else if (pf->spec.type == s)
-		join_value(&(pf->output), va_arg(pf->argptr, char *), pf->spec);
+	{
+		char *res = va_arg(pf->argptr, char *);
+		if (!res)
+			res = ft_strdup("(null)");
+		join_value(&(pf->output), res, pf->spec);
+	}
 	else if (pf->spec.type == PERCENT)
 		pf->output = ft_strjoin(pf->output, "\045");
-	else if (pf->spec.type == X)
-		join_value(&(pf->output), ft_lltoa_base(va_arg(pf->argptr, unsigned long long), 16), pf->spec);
-	else if (pf->spec.type == x)
-		join_value(&(pf->output), ft_strtolower(ft_lltoa_base((int)va_arg(pf->argptr, unsigned long long), 16)), pf->spec);
-	else if (pf->spec.type == o)
-		join_value(&(pf->output), ft_lltoa_base((int)va_arg(pf->argptr, unsigned long long), 8), pf->spec);
-	else if (pf->spec.type == O)
-		join_value(&(pf->output), ft_lltoa_base(va_arg(pf->argptr, unsigned long long), 8), pf->spec);
-	else if (pf->spec.type == b)
-		join_value(&(pf->output), ft_lltoa_base((int)va_arg(pf->argptr, unsigned long long), 2), pf->spec);
-	else if (pf->spec.type == B)
-		join_value(&(pf->output), ft_lltoa_base(va_arg(pf->argptr, unsigned long long), 2), pf->spec);
 	else if (pf->spec.type == p)
-		join_value(&(pf->output), ft_strjoin("0x", ft_strtolower(ft_lltoa_base(va_arg(pf->argptr, unsigned long long), 16))), pf->spec);
+		join_value(&(pf->output), ft_strjoin("0x", ft_strtolower(ft_ulltoa_base(va_arg(pf->argptr, unsigned long long), 16))), pf->spec);
 }
 
 int				ft_printf(const char *format, ...)
@@ -254,7 +194,8 @@ int				ft_printf(const char *format, ...)
 	{
 		set_spec(&pf);
 		check_asterisk(&pf);
-		/*printf("back: %x%x%x asterisk: %d rgb: %x%x%x asterisk: %d f1: %d %d %d %d %d %d %d, w: %d, p: %d, f2: %d t: %c\n",
+		/*
+		printf("back: %x%x%x asterisk: %d rgb: %x%x%x asterisk: %d f1: %d %d %d %d %d %d %d, w: %d, p: %d, f2: %d t: %c\n",
 			pf.spec.background.r,
 			pf.spec.background.g,
 			pf.spec.background.b,

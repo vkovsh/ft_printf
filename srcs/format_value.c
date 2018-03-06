@@ -6,7 +6,7 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 02:24:18 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/02 02:25:10 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/06 16:41:36 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,10 @@ static void	set_sharp(char **value, t_spec spec)
 t_bool			is_numeric_type(t_type t)
 {
 	if (t == i || t == d ||
-		t == u || t == o ||
+		t == u || t == U ||
+		t == o || t == O ||
 		t == x || t == X ||
-		t == b)
+		t == b || t == B)
 		return (TRUE);
 	return (FALSE);
 }
@@ -92,35 +93,6 @@ static void	set_precision(char **value, t_spec spec)
 		}
 	}
 }
-/*
-static void		set_color(char **value, t_spec spec)
-{
-	char 		*color;
-
-	if (spec.color.r || spec.color.g || spec.color.b)
-	{
-		color = ft_strjoin("\x1b[38;2;", ft_strjoin(ft_itoa(spec.color.r), ";"));
-		color = ft_strjoin(color, ft_strjoin(ft_itoa(spec.color.g), ";"));
-		color = ft_strjoin(color, ft_strjoin(ft_itoa(spec.color.b), "m"));
-		*value = ft_strjoin(color, *value);
-		*value = ft_strjoin(*value, "\x1b[0m");
-	}
-}
-
-static void		set_background(char **value, t_spec spec)
-{
-	char 		*color;
-
-	if (spec.background.r || spec.background.g || spec.background.b)
-	{
-		color = ft_strjoin("\x1b[48;2;", ft_strjoin(ft_itoa(spec.background.r), ";"));
-		color = ft_strjoin(color, ft_strjoin(ft_itoa(spec.background.g), ";"));
-		color = ft_strjoin(color, ft_strjoin(ft_itoa(spec.background.b), "m"));
-		*value = ft_strjoin(color, *value);
-		*value = ft_strjoin(*value, "\x1b[0m");
-	}
-}
-*/
 
 void			set_color_and_background(char **value, t_spec spec)
 {
@@ -156,15 +128,26 @@ void			set_color_and_background(char **value, t_spec spec)
 	}
 }
 
+void			set_plus(char **value, t_spec spec)
+{
+	if (is_numeric_type(spec.type))
+	{
+		if (spec.plus_flag)
+		{
+			if (**value != '-')
+				*value = ft_strjoin("+", *value);
+		}
+	}	
+}
+
 void			join_value(char **output, char *value, t_spec spec)
 {
 	if (spec.type != T)
 	{
+		set_plus(&value, spec);
 		set_precision(&value, spec);
 		set_sharp(&value, spec);
 		set_color_and_background(&value, spec);
-		//set_color(&value, spec);
-		//set_background(&value, spec);
 		set_width(&value, spec);
 	}
 	*output = ft_strjoin(*output, value);

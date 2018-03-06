@@ -6,7 +6,7 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 16:27:58 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/02/17 18:55:33 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/06 11:59:05 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,5 +164,7 @@ void				ft_lstrev(t_list **const lst);
 
 char				*ft_lltoa(long long n);
 
-char				*ft_lltoa_base(unsigned long long n, int base);
+char				*ft_ulltoa_base(unsigned long long int n, int base);
+
+char				*ft_ulltoa(unsigned long long int n);
 #endif

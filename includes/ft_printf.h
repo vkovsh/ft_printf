@@ -6,7 +6,7 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 15:59:20 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/02 03:38:27 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/06 17:47:01 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,4 +109,8 @@ t_spec				get_spec(char **txt_pointer);
 void				join_value(char **output, char *value, t_spec spec);
 
 char				*ft_wstr_to_str(wchar_t *ws);
+
+void				set_signed_decimal(t_pfargs *pf);
+
+void				set_unsigned_value(t_pfargs *pf);
 #endif
