@@ -42,6 +42,8 @@ typedef enum 		e_flag2
 
 typedef enum 		e_type
 {
+	none = 0,
+    r = 'r',
 	s = 's',
 	S = 'S',
 	p = 'p',
@@ -105,6 +107,8 @@ typedef struct		s_pfargs
 
 int					ft_printf(const char *format, ...);
 
+int                 ft_dprintf(int fd, const char *format, ...);
+
 t_spec				get_spec(char **txt_pointer);
 
 void				join_value(char **output, char *value, t_spec spec);
@@ -114,4 +118,16 @@ char				*ft_wstr_to_str(wchar_t *ws);
 void				set_signed_decimal(t_pfargs *pf);
 
 void				set_unsigned_value(t_pfargs *pf);
+
+void                del_one(void *content, size_t content_size);
+
+void			    set_value(t_pfargs *pf);
+
+void			    set_spec(t_pfargs *pf);
+
+void			    check_asterisk(t_pfargs *pf);
+
+void			    init_list(const char *format, t_list **t, char **output);
+
+int				    ft_output(const int fd, const char *output, int *const length);
 #endif

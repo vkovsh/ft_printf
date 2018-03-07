@@ -14,8 +14,8 @@
 
 static t_bool				is_flag2(t_flag2 f2)
 {
-	if (f2 == h || f2 == l ||
-			f2 == ll || f2 == j || f2 == z)
+	if (f2 == hh || f2 == h || f2 == l ||
+            f2 == ll || f2 == j || f2 == z)
 		return (TRUE);
 	return (FALSE);
 }
@@ -31,7 +31,9 @@ void 						set_unsigned_value(t_pfargs *pf)
 	t = pf->spec.type;
 	if (is_flag2(f2))
 	{
-		if (f2 == h)
+        if (f2 == hh)
+            uv = (unsigned char)uv;
+		else if (f2 == h)
 			uv = (unsigned short int)uv;
 		else if (f2 == l)
 			uv = (unsigned long int)uv;

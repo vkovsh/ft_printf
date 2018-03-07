@@ -34,7 +34,8 @@ SRC_NAME	=	ft_printf.c 			\
 				format_value.c 			\
 				ft_ansi.c				\
 				set_signed_decimal.c	\
-				set_unsigned_value.c
+				set_unsigned_value.c    \
+				ft_dprintf.c
 
 LIBFT_NAME	=	ft_islow.c 		\
 				ft_lstrev.c		\

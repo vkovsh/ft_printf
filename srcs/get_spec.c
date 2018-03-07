@@ -15,7 +15,7 @@ t_bool			is_type(char k)
 		k == D || k == i || k == o || k == O ||
 		k == u || k == U || k == x || k == X ||
 		k == c || k == C || k == T || k == b ||
-		k == PERCENT)
+		k == PERCENT || k == r)
 		return (TRUE);
 	return (FALSE);
 }
@@ -159,7 +159,7 @@ void			set_type(char **txt_pointer, t_spec *spec)
 	}
 	else
 	{
-		spec->type = c;
+		spec->type = none;
 		(*txt_pointer)++;
 	}
 }
