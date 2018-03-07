@@ -128,7 +128,7 @@ void			set_color_and_background(char **value, t_spec spec)
 	}
 }
 
-void			set_plus(char **value, t_spec spec)
+void			set_plus_and_space(char **value, t_spec spec)
 {
 	if (is_numeric_type(spec.type))
 	{
@@ -137,6 +137,8 @@ void			set_plus(char **value, t_spec spec)
 			if (**value != '-')
 				*value = ft_strjoin("+", *value);
 		}
+		else if (spec.space_flag)
+			*value = ft_strjoin("\40", *value);
 	}	
 }
 
@@ -144,7 +146,7 @@ void			join_value(char **output, char *value, t_spec spec)
 {
 	if (spec.type != T)
 	{
-		set_plus(&value, spec);
+		set_plus_and_space(&value, spec);
 		set_precision(&value, spec);
 		set_sharp(&value, spec);
 		set_color_and_background(&value, spec);

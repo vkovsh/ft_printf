@@ -194,8 +194,8 @@ int				ft_printf(const char *format, ...)
 	{
 		set_spec(&pf);
 		check_asterisk(&pf);
-		/*
-		printf("back: %x%x%x asterisk: %d rgb: %x%x%x asterisk: %d f1: %d %d %d %d %d %d %d, w: %d, p: %d, f2: %d t: %c\n",
+
+		/*printf("back: %x%x%x asterisk: %d rgb: %x%x%x asterisk: %d f1: %d %d %d %d %d   %d %d, w: %d, p: %d, f2: %d t: %c\n",
 			pf.spec.background.r,
 			pf.spec.background.g,
 			pf.spec.background.b,

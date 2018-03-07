@@ -35,8 +35,6 @@ void 						set_unsigned_value(t_pfargs *pf)
 			uv = (unsigned short int)uv;
 		else if (f2 == l)
 			uv = (unsigned long int)uv;
-		else if (f2 == j)
-			uv = (uintmax_t)uv;
 		if (t == u || t == U)
 			join_value(&(pf->output), ft_ulltoa(uv), pf->spec);
 		else if (t == o || t == O)

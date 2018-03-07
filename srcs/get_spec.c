@@ -42,7 +42,7 @@ void			set_flag1(char **txt_pointer, t_spec *spec)
 			spec->minus_flag = TRUE;
 		else if (flag == PLUS)
 			spec->plus_flag = TRUE;
-		else
+		else if (flag == SPACE)
 			spec->space_flag = TRUE;
 		(*txt_pointer)++;
 	}

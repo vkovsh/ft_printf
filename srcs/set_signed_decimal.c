@@ -27,8 +27,6 @@ void					set_signed_decimal(t_pfargs *pf)
 			v = (short int)v;
 		else if (f2 == l)
 			v = (long int)v;
-		else if (f2 == j)
-			v = (intmax_t)v;
 		join_value(&(pf->output), ft_lltoa(v), pf->spec);
 	}
 	else

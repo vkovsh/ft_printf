@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include "libft.h"
 # include <stdarg.h>
+# include <stdint.h>
 
 typedef enum 		e_flag1
 {
@@ -25,7 +26,7 @@ typedef enum 		e_flag1
 	ZERO = '0',
 	MINUS = '-',
 	PLUS = '+',
-	SPACE = '\32'
+	SPACE = '\040'
 }					t_flag1;
 
 typedef enum 		e_flag2
