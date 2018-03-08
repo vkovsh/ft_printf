@@ -33,10 +33,11 @@ static void	set_width(char **value, t_spec spec)
 			{
 				*value = ft_strjoin(*value, spaces);
 			}
+                /*
 			else if (spec.plus_flag && spec.zero_flag)
 			{
 				*value = ft_strjoin(ft_strjoin("+", spaces), (*value) + 1);
-			}
+			}*/
 			else
 			{
 				*value = ft_strjoin(spaces, *value);
