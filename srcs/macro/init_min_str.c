@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-char			*init_min_str(char c)
+char			*init_min_str(int c)
 {
     char		*min_str;
 

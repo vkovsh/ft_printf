@@ -135,7 +135,7 @@ void		        check_double_percent(char *format);
 
 t_value             *fresh_value(t_type t, void *data, size_t count);
 
-char			    *init_min_str(char c);
+char			    *init_min_str(int c);
 
 void			    init_list(const char *format, t_list **t, char **output);
 
