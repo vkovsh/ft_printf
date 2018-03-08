@@ -84,11 +84,20 @@ static void	set_precision(char **value, t_spec spec)
 		if (spec.precision)
 		{
 			length = (int)ft_strlen(*value);
+            if (spec.space_flag)
+                length--;
 			if (spec.precision > length)
 			{
-				zeros = ft_strnew(spec.precision - length);
-				ft_memset(zeros, '0', spec.precision - length);
-				*value = ft_strjoin(zeros, *value);
+                zeros = ft_strnew(spec.precision - length);
+                ft_memset(zeros, '0', spec.precision - length);
+                if (spec.space_flag == FALSE)
+                {
+                    *value = ft_strjoin(zeros, *value);
+                }
+                else
+                {
+                    *value = ft_strjoin(ft_strjoin("\040", zeros), *value + 1);
+                }
 			}
 		}
 	}
