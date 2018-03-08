@@ -25,14 +25,22 @@ static void	set_width(char **value, t_spec spec)
 		if (spec.width > length)
 		{
 			spaces = ft_strnew(spec.width - length);
-            if (spec.minus_flag == FALSE && spec.zero_flag == TRUE && spec.precision < length)
-                ft_memset(spaces, '0', spec.width - length);
+			if (spec.minus_flag == FALSE && spec.zero_flag == TRUE && spec.precision < length)
+				ft_memset(spaces, '0', spec.width - length);
             else
 			    ft_memset(spaces, ' ', spec.width - length);
 			if (spec.minus_flag == TRUE)
+			{
 				*value = ft_strjoin(*value, spaces);
+			}
+			else if (spec.plus_flag && spec.zero_flag)
+			{
+				*value = ft_strjoin(ft_strjoin("+", spaces), (*value) + 1);
+			}
 			else
+			{
 				*value = ft_strjoin(spaces, *value);
+			}
 		}
 	}
 }
