@@ -50,13 +50,14 @@ static void	set_sharp(char **value, t_spec spec)
 	if (spec.sharp_flag == TRUE)
 	{
 		if (spec.type == x || spec.type == X ||
-			spec.type == b || spec.type == o)
+                spec.type == b || spec.type == B ||
+                spec.type == o || spec.type == O)
 		{
 			if (spec.type == x)
 				*value = ft_strjoin("0x", *value);
 			else if (spec.type == X)
 				*value = ft_strjoin("0X", *value);
-			else if (spec.precision < (int)ft_strlen(*value))
+			else if (spec.precision < (int)ft_strlen(*value) && **value != 48)
 				*value = ft_strjoin("0", *value);
 		}
 	}
