@@ -149,7 +149,10 @@ void			set_plus_and_space(char **value, t_spec spec)
 				*value = ft_strjoin("+", *value);
 		}
 		else if (spec.space_flag)
-			*value = ft_strjoin("\40", *value);
+        {
+            if (**value != '-')
+                *value = ft_strjoin("\40", *value);
+        }
 	}	
 }
 
