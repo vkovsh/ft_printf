@@ -47,6 +47,11 @@ void			set_spec(t_pfargs *pf)
 
 void			set_value(t_pfargs *pf)
 {
+    if (pf->spec.type == n)
+    {
+        int *count = va_arg(pf->argptr, int *);
+        *count = (int)ft_strlen(pf->output);
+    }
 	if (pf->spec.type == T)
 	{
 		join_value(&(pf->output), ((t_value *)((pf->t)->content))->value, pf->spec);

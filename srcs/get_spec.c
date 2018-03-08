@@ -15,7 +15,7 @@ t_bool			is_type(char k)
 		k == D || k == i || k == o || k == O ||
 		k == u || k == U || k == x || k == X ||
 		k == c || k == C || k == T || k == b ||
-		k == PERCENT || k == r)
+		k == PERCENT || k == r || k == n)
 		return (TRUE);
 	return (FALSE);
 }

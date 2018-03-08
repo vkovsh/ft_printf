@@ -61,6 +61,7 @@ typedef enum 		e_type
 	T = 'T',
 	b = 'b',
 	B = 'B',
+	n = 'n',
 	PERCENT = '\033'
 }					t_type;
 
