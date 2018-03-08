@@ -12,36 +12,7 @@
 
 #include "ft_printf.h"
 #include <stdio.h>
-
-static void		check_double_percent(char *format)
-{
-	while ((format = ft_strstr(format, "\045\045")))
-		*(format + 1) = '\033';
-}
-
-static t_value  *fresh_value(t_type t, void *data, size_t count)
-{
-    t_value     *sp;
-
-    if (!(sp = (t_value *)malloc(sizeof(t_value))))
-        return (NULL);
-    sp->spec.type = t;
-    if (!data)
-        sp->value = NULL;
-    else
-    {
-        sp->value = ft_strnew(count);
-        ft_memmove(sp->value, data, count);
-    }
-    sp->spec.asterisk_width = FALSE;
-    sp->spec.asterisk_precision = FALSE;
-    sp->spec.asterisk_color = FALSE;
-    sp->spec.asterisk_background = FALSE;
-    sp->spec.width = 0;
-    sp->spec.precision = 1;
-    return (sp);
-}
-
+/*
 static void		parse_specs(char *format, t_list **parsed_values)
 {
 	char		**bytes;
@@ -96,35 +67,7 @@ static void		parse_specs(char *format, t_list **parsed_values)
 		b_counter++;
 	}
 }
-
-int				ft_output(const int fd, const char *output, int *const length)
-{
-	*length = ft_strlen(output);
-	write(fd, output, *length);
-	return (*length);
-}
-
-char			*init_min_str(char c)
-{
-	char		*min_str;
-
-	min_str = ft_strnew(1);
-	min_str[0] = c;
-	return (min_str);
-}
-
-void			init_list(const char *format, t_list **t, char **output)
-{
-	char *format_cpy;
-
-	format_cpy = ft_strnew(ft_strlen(format));
-	ft_memmove(format_cpy, format, ft_strlen(format));
-	*t = NULL;
-	*output = ft_strnew(0);
-	parse_specs(format_cpy, t);
-	ft_lstrev(t);
-}
-
+*/
 void			check_asterisk(t_pfargs *pf)
 {
 	int 		color_nbr;
