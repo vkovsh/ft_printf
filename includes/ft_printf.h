@@ -89,6 +89,7 @@ typedef struct  	s_spec
 	int				precision;
 	enum e_flag2	flag2;	
 	enum e_type		type;
+    char            next_char;
 }					t_spec;
 
 typedef struct  	s_value
@@ -103,6 +104,7 @@ typedef struct		s_pfargs
 	struct s_list	*t;
 	char			*output;
 	int				length;
+    int             fd;
 	struct s_spec	spec;
 }					t_pfargs;
 
@@ -134,7 +136,7 @@ int				    ft_output(const int fd, const char *output, int *const length);
 
 void		        check_double_percent(char *format);
 
-t_value             *fresh_value(t_type t, void *data, size_t count);
+t_value             fresh_value(t_type t, void *data, size_t count);
 
 char			    *init_min_str(int c);
 

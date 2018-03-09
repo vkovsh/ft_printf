@@ -12,9 +12,15 @@
 
 #include "ft_printf.h"
 
-int	ft_output(const int fd, const char *output, int *const length)
+int     ft_output(const int fd, const char *output, int *const length)
 {
-	*length = ft_strlen(output);
-	write(fd, output, *length);
+    int len;
+
+    len = ft_strlen(output);
+    if (!(*length))
+	    *length = len;
+    else
+        *length += len;
+	write(fd, output, len);
 	return (*length);
 }

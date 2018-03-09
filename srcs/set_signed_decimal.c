@@ -21,7 +21,7 @@ void					set_signed_decimal(t_pfargs *pf)
 	v = va_arg(pf->argptr, long long int);
 	f2 = pf->spec.flag2;
 	t = pf->spec.type;
-	if (f2 == h || f2 == l || f2 == ll || f2 == j || f2 == z || f2 == hh)
+	if (t != D && (f2 == h || f2 == l || f2 == ll || f2 == j || f2 == z || f2 == hh))
 	{
         if (f2 == hh)
             v = (signed char)v;

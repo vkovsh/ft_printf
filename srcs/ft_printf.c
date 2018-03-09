@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include "../includes/ft_printf.h"
 #include <stdio.h>
 
 void			check_asterisk(t_pfargs *pf)
@@ -42,12 +43,17 @@ void			check_asterisk(t_pfargs *pf)
 
 void			set_value(t_pfargs *pf)
 {
-    if (pf->spec.type == n)
+    if (pf->spec.type == none)
+    {
+        pf->spec.type = c;
+        join_value(&(pf->output), ((t_value *)((pf->t)->content))->value, pf->spec);
+    }
+    else if (pf->spec.type == n)
     {
         int *count = va_arg(pf->argptr, int *);
         *count = (int)ft_strlen(pf->output);
     }
-	if (pf->spec.type == T)
+	else if (pf->spec.type == T)
 	{
 		join_value(&(pf->output), ((t_value *)((pf->t)->content))->value, pf->spec);
 	}
@@ -70,14 +76,36 @@ void			set_value(t_pfargs *pf)
         join_value(&(pf->output), octal, pf->spec);
 	}
 	else if (pf->spec.type == S || (pf->spec.type == s && pf->spec.flag2 == l))
-		join_value(&(pf->output), ft_wstr_to_str(va_arg(pf->argptr, wchar_t *)), pf->spec);
+    {
+        wchar_t *wc = va_arg(pf->argptr, wchar_t * );
+        if (wc)
+        {
+            join_value(&(pf->output), ft_wstr_to_str(wc), pf->spec);
+        }
+        else
+        {
+            join_value(&(pf->output), ft_strdup("(null)"), pf->spec);
+        }
+    }
 	else if (pf->spec.type == C || (pf->spec.type == c && pf->spec.flag2 == l))
 	{
 		wchar_t wc = va_arg(pf->argptr, wchar_t);
-        wchar_t *wstr = (wchar_t *)malloc(sizeof(wchar_t) * 2);
-        wstr[0] = wc;
-        wstr[1] = 0;
-		join_value(&(pf->output), ft_wstr_to_str(wstr), pf->spec);
+        if (!wc)
+        {
+            join_value(&(pf->output), init_min_str(42), pf->spec);
+            (pf->output)[(int)ft_strlen(pf->output) - 1] = '\000';
+            ft_output(pf->fd, pf->output, &(pf->length));
+            pf->output = ft_strdup("");
+            (pf->length)++;
+            write(pf->fd, "\000", 1);
+        }
+        else
+        {
+            wchar_t *wstr = (wchar_t *) malloc(sizeof(wchar_t) * 2);
+            wstr[0] = wc;
+            wstr[1] = 0;
+            join_value(&(pf->output), ft_wstr_to_str(wstr), pf->spec);
+        }
 	}
 	else if (pf->spec.type == d || pf->spec.type == i || pf->spec.type == D)
 		set_signed_decimal(pf);
@@ -88,7 +116,21 @@ void			set_value(t_pfargs *pf)
 		set_unsigned_value(pf);
 	}
 	else if (pf->spec.type == c)
-		join_value(&(pf->output), init_min_str(va_arg(pf->argptr, int)), pf->spec);
+    {
+        int my_char = va_arg(pf->argptr, int);
+        if (my_char)
+            join_value(&(pf->output), init_min_str(my_char), pf->spec);
+        else
+        {
+            join_value(&(pf->output), init_min_str(42), pf->spec);
+            (pf->output)[(int)ft_strlen(pf->output) - 1] = '\000';
+            ft_output(pf->fd, pf->output, &(pf->length));
+            pf->output = ft_strdup("");
+            (pf->length)++;
+            write(pf->fd, "\000", 1);
+        }
+
+    }
 	else if (pf->spec.type == s)
 	{
 		char *res = va_arg(pf->argptr, char *);
@@ -111,9 +153,13 @@ void            del_one(void *content, size_t content_size)
 int				ft_printf(const char *format, ...)
 {
 	t_pfargs	pf;
+    char        *first_spec;
 
-	if (!ft_strchr(format, '%'))
-		return (ft_output(1, format, &(pf.length)));
+    first_spec = NULL;
+    pf.length = 0;
+    pf.fd = 1;
+    if (!(first_spec = ft_strchr(format, '%')))
+		return (ft_output(pf.fd, format, &(pf.length)));
 	init_list(format, &(pf.t), &(pf.output));
 	va_start(pf.argptr, format);
 	while (pf.t)
@@ -144,7 +190,7 @@ int				ft_printf(const char *format, ...)
 		pf.t = (pf.t)->next;
 	}
 	va_end(pf.argptr);
-	ft_output(1, pf.output, &(pf.length));
+	ft_output(pf.fd, pf.output, &(pf.length));
     ft_strdel(&(pf.output));
     ft_lstdel(&(pf.t), &del_one);
 	return (pf.length);

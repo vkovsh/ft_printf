@@ -29,7 +29,7 @@ void 						set_unsigned_value(t_pfargs *pf)
 	uv = va_arg(pf->argptr, unsigned long long int);
 	f2 = pf->spec.flag2;
 	t = pf->spec.type;
-	if (is_flag2(f2))
+	if (t != O && t != U && is_flag2(f2))
 	{
         if (f2 == hh)
             uv = (unsigned char)uv;

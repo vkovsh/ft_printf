@@ -160,6 +160,7 @@ void			set_type(char **txt_pointer, t_spec *spec)
 	else
 	{
 		spec->type = none;
+		spec->next_char = **txt_pointer;
 		(*txt_pointer)++;
 	}
 }
