@@ -41,7 +41,8 @@ MACRO_NAME  =   check_double_percent.c  \
                 fresh_value.c           \
                 ft_output.c             \
                 init_min_str.c          \
-                init_list.c
+                init_list.c 			\
+                set_spec.c
 
 SRC_NAME	=	ft_printf.c 			\
 				get_spec.c 				\

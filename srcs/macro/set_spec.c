@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_list.c                                        :+:      :+:    :+:   */
+/*   set_spec.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/09 11:51:03 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/09 12:01:34 by vkovsh           ###   ########.fr       */
+/*   Created: 2018/03/09 11:50:06 by vkovsh            #+#    #+#             */
+/*   Updated: 2018/03/09 11:50:14 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		init_list(const char *format, t_list **t, char **output)
+void			set_spec(t_pfargs *pf)
 {
-	char	*format_cpy;
-
-	format_cpy = ft_strnew(ft_strlen(format));
-	ft_memmove(format_cpy, format, ft_strlen(format));
-	*t = NULL;
-	*output = ft_strnew(0);
-	parse_specs(format_cpy, t);
-	ft_lstrev(t);
+	pf->spec = ((t_value *)((pf->t)->content))->spec;
 }

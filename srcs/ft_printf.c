@@ -40,11 +40,6 @@ void			check_asterisk(t_pfargs *pf)
 	}
 }
 
-void			set_spec(t_pfargs *pf)
-{
-	pf->spec = ((t_value *)((pf->t)->content))->spec;
-}
-
 void			set_value(t_pfargs *pf)
 {
     if (pf->spec.type == n)
