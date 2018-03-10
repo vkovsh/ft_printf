@@ -177,36 +177,33 @@ int	main(int ac, char **av)
 	{
 		if (*av[ac - 1] == 'p')
 		{
-			/*
 			printf("{%10d}", 42);
 			printf("{%4d}", 10000);
 			printf("{%30d}", 10000);
-			printf("{%10d}", -42);*/
-			//printf("{%3c}", 0);
-			//printf("{%5p}", 0);
-			//printf("{%-15p}", 0);
-			//printf("{%-13p}", &strlen);
-			//printf("{%-12p}", &strlen);
+			printf("{%10d}", -42);
+			printf("{%3c}", 0);
+			printf("{%5p}", 0);
+			printf("{%-15p}", 0);
+			printf("{%-13p}", &strlen);
+			printf("{%-12p}", &strlen);
 			printf("{%10R}");
-			/*
 			printf("{%30S}", L"我是一只猫。");
-			printf("{%-30S}", L"我是一只猫。");*/
+			printf("{%-30S}", L"我是一只猫。");
 		}
 		else if (*av[ac - 1] == 'f')
-		{/*
+		{
 			ft_printf("{%10d}", 42);
 			ft_printf("{%4d}", 10000);
 			ft_printf("{%30d}", 10000);
-			ft_printf("{%10d}", -42);*/
-			/*ft_printf("{%3c}", 0);
+			ft_printf("{%10d}", -42);
+			ft_printf("{%3c}", 0);
 			ft_printf("{%5p}", 0);
-			ft_printf("{%-15p}", 0);*/
-			//ft_printf("{%-13p}", &strlen);
-			//ft_printf("{%-12p}", &strlen);
+			ft_printf("{%-15p}", 0);
+			ft_printf("{%-13p}", &strlen);
+			ft_printf("{%-12p}", &strlen);
 			ft_printf("{%10R}");
-			/*
 			ft_printf("{%30S}", L"我是一只猫。");
-			ft_printf("{%-30S}", L"我是一只猫。");*/
+			ft_printf("{%-30S}", L"我是一只猫。");
 		}
 	}
 	return (0);

@@ -16,9 +16,6 @@ t_value		fresh_value(t_type t, void *data, size_t count)
 {
 	t_value	sp;
 
-	/*
-	if (!(sp = (t_value *)malloc(sizeof(t_value))))
-		return (NULL);*/
 	sp.spec.type = t;
 	if (!data)
 		sp.value = NULL;

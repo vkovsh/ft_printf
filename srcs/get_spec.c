@@ -1,4 +1,6 @@
 #include "ft_printf.h"
+#include "../includes/ft_printf.h"
+#include <stdio.h>
 
 t_bool			is_flag1(char c)
 {
@@ -152,6 +154,13 @@ void			set_flag2(char **txt_pointer, t_spec *spec)
 
 void			set_type(char **txt_pointer, t_spec *spec)
 {
+	//printf("[%d]\n", **txt_pointer);
+	if (!(**txt_pointer))
+	{
+		spec->type = none;
+		spec->next_char = '%';
+		return ;
+	}
 	if (is_type(**txt_pointer))
 	{
 		spec->type = **txt_pointer;
