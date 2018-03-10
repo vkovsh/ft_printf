@@ -54,10 +54,11 @@ void            parse_specs(char *format, t_list **parsed_values)
             sp.value = init_min_str(sp.spec.next_char);
             ft_lstadd(parsed_values, ft_lstnew(&sp, sizeof(t_value)));
         }
-        else if (sp.spec.next_char == '%' && bytes[++b_counter])
+        else if (sp.spec.next_char == '%' && bytes[b_counter + 1])
         {
             sp.value = init_min_str('%');
             ft_lstadd(parsed_values, ft_lstnew(&sp, sizeof(t_value)));
+            b_counter++;
         }
         if (bytes[b_counter])
         {

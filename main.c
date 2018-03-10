@@ -36,14 +36,14 @@ int	main(int ac, char **av)
 		}
 		else if (*av[ac - 1] == 'f')
 		{
-			ft_printf("%%");
+			/*ft_printf("%%");
 			ft_printf("aa%%bb");
 			ft_printf("%%%%%%%%%%");
 			ft_printf(".%%.%%.%%.%%.%%.%%.%%.%%.");
 			ft_printf("%");
-			ft_printf("% Zoooo");
+			ft_printf("% Zoooo");*/
 			ft_printf("{%}");
-			ft_printf("{% %}");
+			//ft_printf("{% %}");
 		}
 	}
 	else if (ft_atoi(av[ac - 2]) == 7)
