@@ -6,7 +6,7 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 02:24:18 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/06 16:41:36 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/11 18:22:49 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,21 @@ static void	set_width(char **value, t_spec spec)
             {
                 *value = ft_strjoin(*value, spaces);
             }
-			else if (spec.plus_flag && spec.zero_flag)
+			else if ((spec.plus_flag || **value == '-') && spec.zero_flag)
 			{
-				*value = ft_strjoin(ft_strjoin("+", spaces), (*value) + 1);
+				if (**value != '-')
+					*value = ft_strjoin(ft_strjoin("+", spaces), (*value) + 1);
+				else
+					*value = ft_strjoin(ft_strjoin("-", spaces), (*value) + 1);
+			}
+			else if (spec.sharp_flag == TRUE && spec.zero_flag == TRUE)
+			{
+				ft_memset(spaces, '0', spec.width - length);
+				char *ln = ft_strnew(2);
+				ln[0] = (*value)[0];
+				ln[1] = (*value)[1];
+				*value = ft_strjoin(ft_strjoin(ln, spaces), (*value) + 2);
+				return ;
 			}
 			else
 			{
@@ -47,6 +59,10 @@ static void	set_width(char **value, t_spec spec)
 
 static void	set_sharp(char **value, t_spec spec)
 {
+	if (**value == '\000')
+		return ;
+	if (**value == 48 && !(*(*value + 1)))
+		return ;
 	if (spec.sharp_flag == TRUE)
 	{
 		if (spec.type == x || spec.type == X ||
@@ -90,14 +106,51 @@ static void	set_precision(char **value, t_spec spec)
 			{
                 zeros = ft_strnew(spec.precision - length);
                 ft_memset(zeros, '0', spec.precision - length);
-                if (spec.space_flag == FALSE)
+                if (spec.space_flag == FALSE || (spec.type != i && spec.type != d))
                 {
-                    *value = ft_strjoin(zeros, *value);
+					if (**value == '-')
+						*value = ft_strjoin(ft_strjoin("-0", zeros), *value + 1);
+					else if (**value == '+')
+						*value = ft_strjoin(ft_strjoin("+0", zeros), *value + 1);
+					else
+						*value = ft_strjoin(zeros, *value);
                 }
                 else
                 {
                     *value = ft_strjoin(ft_strjoin("\040", zeros), *value + 1);
                 }
+			}
+			else if (spec.precision == length && **value == '+')
+			{
+				*value = ft_strjoin("+0", *value + 1);
+			}
+			else if (spec.precision == length && **value == '-')
+			{
+				*value = ft_strjoin("-0", *value + 1);
+			}
+		}
+		else
+		{
+			if (spec.sharp_flag == FALSE)
+			{
+				int len = (int)ft_strlen(*value);
+				if ((*value)[len - 1] == 48)
+				{
+					(*value)[len - 1] = '\000';
+				}
+			}
+			else if (spec.sharp_flag == TRUE &&
+					(spec.type == x || spec.type == X))
+			{
+				int len = (int)ft_strlen(*value);
+				if ((*value)[len - 1] == 48)
+				{
+					//printf("bbb: %sbbb\n", *value);
+					//free(*value);
+					//*value = NULL;
+					(*value) = ft_strnew(0);
+					spec.sharp_flag = FALSE;
+				}
 			}
 		}
 	}
@@ -156,12 +209,21 @@ void			set_plus_and_space(char **value, t_spec spec)
 		if (spec.plus_flag)
 		{
 			if (**value != '-')
-				*value = ft_strjoin("+", *value);
+			{
+				if (is_unsigned(spec.type) == FALSE)
+				{
+					*value = ft_strjoin("+", *value);
+				}
+			}
 		}
 		else if (spec.space_flag)
         {
             if (**value != '-')
-                *value = ft_strjoin("\40", *value);
+			{	if (spec.type == d || spec.type == i)
+				{
+                	*value = ft_strjoin("\40", *value);
+				}
+			}
         }
 	}	
 }

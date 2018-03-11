@@ -6,7 +6,7 @@
 #    By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/16 19:36:03 by vkovsh            #+#    #+#              #
-#    Updated: 2018/03/06 17:47:55 by vkovsh           ###   ########.fr        #
+#    Updated: 2018/03/11 15:16:32 by vkovsh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ MACRO_NAME  =   check_double_percent.c  \
                 ft_output.c             \
                 init_min_str.c          \
                 init_list.c 			\
-                set_spec.c
+                set_spec.c				\
+				is_unsigned.c
 
 SRC_NAME	=	ft_printf.c 			\
 				get_spec.c 				\

@@ -104,6 +104,10 @@ void			set_precision(char **txt_pointer, t_spec *spec)
 			spec->precision = 1;
 			spec->asterisk_precision = TRUE;
 		}
+		else
+		{
+			spec->precision = 0;
+		}
 		*txt_pointer = str;
 	}
 	else

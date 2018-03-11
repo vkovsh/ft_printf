@@ -6,7 +6,7 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 17:11:18 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/06 17:35:51 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/11 17:38:58 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void			check_asterisk(t_pfargs *pf)
 
 void			set_value(t_pfargs *pf)
 {
-    if (pf->spec.type == none)
+	if (pf->spec.type == none)
     {
         pf->spec.type = c;
         join_value(&(pf->output), ((t_value *)((pf->t)->content))->value, pf->spec);

@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_bool.h                                          :+:      :+:    :+:   */
+/*   is_unsigned.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/11 15:13:57 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/11 15:14:08 by vkovsh           ###   ########.fr       */
+/*   Created: 2018/03/11 15:08:25 by vkovsh            #+#    #+#             */
+/*   Updated: 2018/03/11 15:15:29 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MY_BOOL_H
-# define MY_BOOL_H
+#include "ft_printf.h"
 
-typedef enum 	e_bool
+t_bool	is_unsigned(t_type t)
 {
-	FALSE,
-	TRUE
-}				t_bool;
-#endif
+	if (t == u || t == U ||
+			t == o || t == O ||
+			t == x || t == X ||
+			t == b || t == B)
+		return (TRUE);
+	return (FALSE);
+}

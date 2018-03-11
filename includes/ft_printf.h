@@ -6,7 +6,7 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 15:59:20 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/06 17:47:01 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/11 15:14:52 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,4 +143,6 @@ char			    *init_min_str(int c);
 void			    init_list(const char *format, t_list **t, char **output);
 
 void				parse_specs(char *format, t_list **parsed_values);
+
+t_bool				is_unsigned(t_type t);
 #endif
