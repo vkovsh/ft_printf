@@ -6,7 +6,7 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 12:23:32 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/09 12:23:45 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/11 18:39:02 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,13 @@ void            parse_specs(char *format, t_list **parsed_values)
         }
         else if (*(bytes[b_counter]))
         {
+			//printf("{%c}", sp.spec.next_char);
             sp.value = init_min_str(sp.spec.next_char);
             ft_lstadd(parsed_values, ft_lstnew(&sp, sizeof(t_value)));
         }
-        else if (sp.spec.next_char == '%' && bytes[b_counter + 1])
+        else if (sp.spec.next_char == '%' /*&& (bytes[b_counter + 1])*/)
         {
+			//printf("{%c}", sp.spec.next_char);
             sp.value = init_min_str('%');
             ft_lstadd(parsed_values, ft_lstnew(&sp, sizeof(t_value)));
             b_counter++;
@@ -68,6 +70,8 @@ void            parse_specs(char *format, t_list **parsed_values)
                 ft_lstadd(parsed_values, ft_lstnew(&sp, sizeof(t_value)));
             }
         }
+		else
+			break ;
         b_counter++;
     }
 }

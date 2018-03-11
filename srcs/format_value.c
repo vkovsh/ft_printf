@@ -6,7 +6,7 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 02:24:18 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/11 18:22:49 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/11 18:49:12 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ static void	set_width(char **value, t_spec spec)
 		if (spec.width > length)
 		{
 			spaces = ft_strnew(spec.width - length);
+			if (spec.type == p && spec.zero_flag)
+			{
+				ft_memset(spaces, '0', spec.width - length);
+				*value = ft_strjoin(ft_strjoin("0x", spaces), *value + 2);
+				return ;
+			}
 			if (spec.minus_flag == FALSE && spec.zero_flag == TRUE && spec.precision < length)
 				ft_memset(spaces, '0', spec.width - length);
             else
