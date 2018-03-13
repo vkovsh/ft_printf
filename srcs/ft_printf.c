@@ -6,7 +6,7 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 17:11:18 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/13 13:48:19 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/13 17:52:05 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,20 @@ void			check_asterisk(t_pfargs *pf)
 	int 		color_nbr;
 	t_color		color;
 
-	pf->spec.width = (pf->spec.asterisk_width) ?
-	va_arg(pf->argptr, int) : pf->spec.width;
+	if (pf->spec.width && pf->spec.asterisk_width)
+	{
+		va_arg(pf->argptr, void *);
+	}
+	else
+	{
+		pf->spec.width = (pf->spec.asterisk_width) ?
+			va_arg(pf->argptr, int) : pf->spec.width;
+	}
+	if (pf->spec.width < 0)
+	{
+		pf->spec.width *= -1;
+		pf->spec.minus_flag = TRUE;
+	}
 	pf->spec.precision = (pf->spec.asterisk_precision) ?
 	va_arg(pf->argptr, int) : pf->spec.precision;
 	if (pf->spec.asterisk_background)
@@ -122,12 +134,26 @@ void			set_value(t_pfargs *pf)
             join_value(&(pf->output), init_min_str(my_char), pf->spec);
         else
         {
-            join_value(&(pf->output), init_min_str(42), pf->spec);
-            (pf->output)[(int)ft_strlen(pf->output) - 1] = '\000';
-            ft_output(pf->fd, pf->output, &(pf->length));
-            pf->output = ft_strdup("");
-            (pf->length)++;
-            write(pf->fd, "\000", 1);
+            join_value(&(pf->output), init_min_str('*'), pf->spec);
+			if (pf->spec.width >= 2 && pf->spec.minus_flag)
+			{
+				char *until;
+				int null_pos = (int)ft_strlen(pf->output) - pf->spec.width;
+				until = ft_strnew(null_pos);
+				ft_memmove(until, pf->output, null_pos);
+				ft_output(pf->fd, until, &(pf->length));
+				write(pf->fd, "\000", 1);
+				(pf->length)++;
+				pf->output += null_pos + 1;
+			}
+			else
+			{
+				(pf->output)[(int)ft_strlen(pf->output) - 1] = '\000';
+				ft_output(pf->fd, pf->output, &(pf->length));
+				pf->output = ft_strdup("");
+				(pf->length)++;
+				write(pf->fd, "\000", 1);
+			}
         }
 
     }

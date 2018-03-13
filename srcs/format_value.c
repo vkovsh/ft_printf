@@ -6,7 +6,7 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 02:24:18 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/13 15:09:33 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/13 17:31:09 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,22 @@ static void	set_width(char **value, t_spec spec)
 	char	*spaces;
 	int		length;
 
+	if ((spec.type == s || spec.type == S) && spec.width && spec.precision == 0)
+	{
+		length = spec.width;
+		spaces = ft_strnew(length);
+		if (spec.zero_flag)
+		{
+			ft_memset(spaces, '0', length);
+			*value = spaces;
+		}
+		else
+		{
+			ft_memset(spaces, ' ', length);
+			*value = spaces;
+		}
+		return ;
+	}
 	if (spec.width)
 	{
 		length = (int)ft_strlen(*value);
@@ -96,11 +112,47 @@ t_bool			is_numeric_type(t_type t)
 	return (FALSE);
 }
 
-static void	set_precision(char **value, t_spec spec)
+t_bool			is_null_pointer(char *value)
 {
-	char	*zeros;
-	int		length;
+	if (value[0] == '0' && value[1] == 'x' &&
+			value[2] == '0' && value[3] == 0)
+		return (TRUE);
+	return (FALSE);
+}
 
+static void		set_precision(char **value, t_spec spec)
+{
+	char		*zeros;
+	int			length;
+
+	if (spec.type == p)
+	{
+		if (is_null_pointer(*value))
+		{
+			if (spec.precision >= 0)
+			{
+				*value = ft_strdup("0x");
+				if (spec.precision >= 1)
+				{
+					char *zeros = ft_strnew(spec.precision);
+					ft_memset(zeros, '0', spec.precision);
+					*value = ft_strjoin(*value, zeros);
+				}
+				return ;
+			}
+		}
+		else
+		{
+			int p_len = (int)ft_strlen((*value + 2));
+			if (p_len < spec.precision)
+			{
+				char *zeros = ft_strnew(spec.precision - p_len);
+				ft_memset(zeros, '0', spec.precision - p_len);
+				*value = ft_strjoin(ft_strjoin("0x", zeros), *value + 2);
+			}
+			return ;
+		}
+	}
 	if (is_numeric_type(spec.type))
 	{
 		if (spec.precision)
@@ -183,6 +235,10 @@ static void	set_precision(char **value, t_spec spec)
 				}
 
 			}
+		}
+		else if (spec.precision == 0 && spec.asterisk_precision)
+		{
+			*value = ft_strnew(0);
 		}
 		else if (spec.precision == 0)
 		{
