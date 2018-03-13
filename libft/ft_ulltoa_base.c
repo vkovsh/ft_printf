@@ -6,7 +6,7 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 11:57:37 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/06 11:58:21 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/13 18:03:12 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ char				*ft_ulltoa_base(unsigned long long int n, int base)
 	char			*str;
 	int				length;
 
-	str = ft_strnew((length = ft_ulllen(n, base)));
+	length = ft_ulllen(n, base);
+	str = ft_strnew(length);
 	if (!n)
 		str[0] = '0';
 	while (n)

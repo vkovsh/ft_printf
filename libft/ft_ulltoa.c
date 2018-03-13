@@ -6,14 +6,14 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 11:42:16 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/06 11:51:16 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/13 18:04:31 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-static int 	ft_ulllen(unsigned long long int n)
+static int	ft_ulllen(unsigned long long int n)
 {
 	int		len;
 
