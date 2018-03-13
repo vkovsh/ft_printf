@@ -6,13 +6,13 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 11:52:26 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/09 12:22:48 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/13 18:15:38 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void    check_double_percent(char *format)
+void	check_double_percent(char *format)
 {
 	while ((format = ft_strstr(format, "\045\045")))
 		*(format + 1) = '\033';
