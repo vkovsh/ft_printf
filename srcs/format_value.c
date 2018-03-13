@@ -6,7 +6,7 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/02 02:24:18 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/11 18:49:12 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/13 15:09:33 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,24 +151,56 @@ static void	set_precision(char **value, t_spec spec)
 				int len = (int)ft_strlen(*value);
 				if ((*value)[len - 1] == 48)
 				{
-					//printf("bbb: %sbbb\n", *value);
-					//free(*value);
-					//*value = NULL;
 					(*value) = ft_strnew(0);
 					spec.sharp_flag = FALSE;
 				}
 			}
 		}
 	}
-	else if (spec.type == s)
+	else if (spec.type == s || spec.type == S)
 	{
 		if (spec.precision > 0)
 		{
-			if (spec.precision < (int)ft_strlen(*value))
+			if (spec.type == s)
 			{
-				char *h = ft_strnew(spec.precision);
-				ft_memmove(h, *value, spec.precision);
-				*value = h;
+				if (spec.precision < (int)ft_strlen(*value))
+				{
+					char *h = ft_strnew(spec.precision);
+					ft_memmove(h, *value, spec.precision);
+					*value = h;
+				}
+			}
+			else
+			{
+				if (spec.precision < (int)ft_strlen(*value))
+				{
+					int k = (spec.precision / 3) * 3;
+					if (!k)
+						k = 1;
+					char *h = ft_strnew(k);
+					ft_memmove(h, *value, k);
+					*value = h;
+				}
+
+			}
+		}
+		else if (spec.precision == 0)
+		{
+			if (spec.type == s)
+			{
+				char *tmp = *value;
+				if (tmp)
+				{
+					while (*tmp)
+					{
+						*tmp = ' ';
+						tmp++;
+					}
+				}
+			}
+			else
+			{
+				*value = ft_strnew(0);
 			}
 		}
 	}
@@ -227,7 +259,7 @@ void			set_plus_and_space(char **value, t_spec spec)
             if (**value != '-')
 			{	if (spec.type == d || spec.type == i)
 				{
-                	*value = ft_strjoin("\40", *value);
+					*value = ft_strjoin("\40", *value);
 				}
 			}
         }
@@ -243,6 +275,15 @@ void			join_value(char **output, char *value, t_spec spec)
 		set_sharp(&value, spec);
 		set_color_and_background(&value, spec);
 		set_width(&value, spec);
+		if (spec.zero_flag && spec.space_flag)
+		{
+			char *first_space = ft_strchr(value, ' ');
+			if (first_space)
+			{
+				*first_space = '0';
+				*value = ' ';
+			}
+		}
 	}
 	*output = ft_strjoin(*output, value);
 }

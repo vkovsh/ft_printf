@@ -6,7 +6,7 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/21 17:11:18 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/11 17:38:58 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/13 13:48:19 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,8 @@ void			set_value(t_pfargs *pf)
 		char *res = va_arg(pf->argptr, char *);
 		if (!res)
 			res = ft_strdup("(null)");
+		else
+			res = ft_strdup(res);
 		join_value(&(pf->output), res, pf->spec);
 	}
 	else if (pf->spec.type == PERCENT)
