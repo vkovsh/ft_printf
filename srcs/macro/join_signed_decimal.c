@@ -6,13 +6,13 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 14:57:51 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/06 15:49:29 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/15 17:38:40 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void					set_signed_decimal(t_pfargs *pf)
+void					join_signed_decimal(t_pfargs *pf)
 {
 	long long int 		v;
 	t_flag2				f2;

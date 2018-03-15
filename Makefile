@@ -6,7 +6,7 @@
 #    By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/16 19:36:03 by vkovsh            #+#    #+#              #
-#    Updated: 2018/03/11 15:16:32 by vkovsh           ###   ########.fr        #
+#    Updated: 2018/03/15 18:31:42 by vkovsh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,15 @@ OBJ_NAME    +=  $(MACRO_NAME:.c=.o)
 
 OBJ_NAME    +=  $(PARSER_NAME:.c=.o)
 
-PARSER_NAME =   parse_specs.c
+PARSER_NAME =   parse_specs.c			\
+				get_spec.c				\
+				set_flag1.c				\
+				set_width.c				\
+				set_precision.c			\
+				set_flag2.c				\
+				set_type.c				\
+				set_background.c		\
+				set_color.c
 
 MACRO_NAME  =   check_double_percent.c  \
                 fresh_value.c           \
@@ -43,14 +51,25 @@ MACRO_NAME  =   check_double_percent.c  \
                 init_min_str.c          \
                 init_list.c 			\
                 set_spec.c				\
-				is_unsigned.c
+				is_unsigned.c			\
+				is_flag1.c				\
+				is_type.c				\
+				join_none.c				\
+				join_n.c				\
+				join_t.c				\
+				join_r.c				\
+				join_big_s.c			\
+				join_big_c.c			\
+				join_signed_decimal.c	\
+				join_unsigned_value.c	\
+				join_c.c				\
+				join_s.c				\
+				join_percent.c			\
+				join_p.c				\
+				del_one.c
 
 SRC_NAME	=	ft_printf.c 			\
-				get_spec.c 				\
 				format_value.c 			\
-				ft_ansi.c				\
-				set_signed_decimal.c	\
-				set_unsigned_value.c    \
 				ft_dprintf.c
 
 LIBFT_NAME	=	ft_islow.c 		    \
@@ -124,7 +143,8 @@ LIBFT_NAME	=	ft_islow.c 		    \
 				ft_arehex.c 	    \
 				ft_lltoa.c 		    \
 				ft_ulltoa_base.c	\
-				ft_ulltoa.c
+				ft_ulltoa.c			\
+				ft_wstr_to_str.c
 
 all: $(NAME)
 

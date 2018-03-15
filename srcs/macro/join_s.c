@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_bool.h                                          :+:      :+:    :+:   */
+/*   join_s.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/11 15:13:57 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/11 15:14:08 by vkovsh           ###   ########.fr       */
+/*   Created: 2018/03/15 17:54:48 by vkovsh            #+#    #+#             */
+/*   Updated: 2018/03/15 17:55:52 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MY_BOOL_H
-# define MY_BOOL_H
+#include "ft_printf.h"
 
-typedef enum 	e_bool
+void	join_s(t_pfargs *pf)
 {
-	FALSE,
-	TRUE
-}				t_bool;
-#endif
+	char *res = va_arg(pf->argptr, char *);
+	if (!res)
+		res = ft_strdup("(null)");
+	else
+		res = ft_strdup(res);
+	join_value(&(pf->output), res, pf->spec);
+}

@@ -6,7 +6,7 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 16:27:58 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/06 11:59:05 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/15 13:40:24 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 # include <string.h>
 # include <limits.h>
+# include <wchar.h>
 # define BUFF_SIZE 32
 
 typedef struct		s_list
@@ -167,4 +168,6 @@ char				*ft_lltoa(long long n);
 char				*ft_ulltoa_base(unsigned long long int n, int base);
 
 char				*ft_ulltoa(unsigned long long int n);
+
+char				*ft_wstr_to_str(wchar_t *ws);
 #endif

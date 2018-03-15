@@ -6,7 +6,7 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 17:42:54 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/06 17:56:36 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/15 17:42:59 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_bool				is_flag2(t_flag2 f2)
 	return (FALSE);
 }
 
-void 						set_unsigned_value(t_pfargs *pf)
+void 						join_unsigned_value(t_pfargs *pf)
 {
 	unsigned long long int 	uv;
 	t_flag2					f2;
