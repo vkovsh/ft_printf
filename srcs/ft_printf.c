@@ -57,9 +57,15 @@ void			set_value(t_pfargs *pf)
 	else if (pf->spec.type == r)
 		join_r(pf);
 	else if (pf->spec.type == S || (pf->spec.type == s && pf->spec.flag2 == l))
+	{
+		pf->spec.type = S;
     	join_big_s(pf);
+	}
 	else if (pf->spec.type == C || (pf->spec.type == c && pf->spec.flag2 == l))
+	{
+		pf->spec.type = C;
 		join_big_c(pf);
+	}
 	else if (pf->spec.type == d || pf->spec.type == i || pf->spec.type == D)
 		join_signed_decimal(pf);
 	else if (is_unsigned(pf->spec.type))

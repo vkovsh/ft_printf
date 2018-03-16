@@ -12,15 +12,17 @@
 
 #include "ft_printf.h"
 
-void	join_big_s(t_pfargs *pf)
+void		join_big_s(t_pfargs *pf)
 {
-	wchar_t *wc = va_arg(pf->argptr, wchar_t * );
+	wchar_t	*wc;
+	char	*str;
+
+	wc = va_arg(pf->argptr, wchar_t *);
 	if (wc)
 	{
-		join_value(&(pf->output), ft_wstr_to_str(wc), pf->spec);
+		str = ft_wstr_to_str(wc);
+		join_value(&(pf->output), str, pf->spec);
 	}
 	else
-	{
-		join_value(&(pf->output), ft_strdup("(null)"), pf->spec);
-	}
+		join_value(&(pf->output), "(null)", pf->spec);
 }

@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   join_percent.c                                     :+:      :+:    :+:   */
+/*   is_null_pointer.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/15 18:03:11 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/15 18:12:23 by vkovsh           ###   ########.fr       */
+/*   Created: 2018/03/16 15:31:21 by vkovsh            #+#    #+#             */
+/*   Updated: 2018/03/16 15:31:23 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		join_percent(t_pfargs *pf)
+t_bool	is_null_pointer(char *value)
 {
-	char	*to_del;
-
-	to_del = pf->output;
-	pf->output = ft_strjoin(pf->output, "\045");
-	ft_strdel(&to_del);
+	if (value[0] == '0' && value[1] == 'x' &&
+			value[2] == '0' && value[3] == 0)
+		return (TRUE);
+	return (FALSE);
 }

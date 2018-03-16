@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   join_percent.c                                     :+:      :+:    :+:   */
+/*   set_precision_to_value.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/15 18:03:11 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/15 18:12:23 by vkovsh           ###   ########.fr       */
+/*   Created: 2018/03/16 15:33:59 by vkovsh            #+#    #+#             */
+/*   Updated: 2018/03/16 15:34:01 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void		join_percent(t_pfargs *pf)
+void				set_precision_to_value(char **value, t_spec spec)
 {
-	char	*to_del;
-
-	to_del = pf->output;
-	pf->output = ft_strjoin(pf->output, "\045");
-	ft_strdel(&to_del);
+	if (spec.type == p)
+		set_precision_to_pointer(value, spec);
+	if (is_numeric_type(spec.type))
+		set_precision_to_numeric(value, spec);
+	else if (spec.type == s || spec.type == S)
+		set_precision_to_string(value, spec);
 }

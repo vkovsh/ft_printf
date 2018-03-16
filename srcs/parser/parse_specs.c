@@ -70,6 +70,17 @@ static void		safe_add_to_list(t_value sp,
 	}
 }
 
+static void		delete_array(char **bytes)
+{
+	int 		i;
+
+	i = -1;
+	while (bytes[++i])
+		ft_strdel(&(bytes[i]));
+	*bytes = NULL;
+	free(bytes);
+}
+
 void			parse_specs(char *format,
 		t_list **parsed_values)
 {
@@ -86,4 +97,5 @@ void			parse_specs(char *format,
 		sp.spec = get_safe_spec(&bytes[b_counter]);
 		safe_add_to_list(sp, parsed_values, bytes[b_counter]);
 	}
+	delete_array(bytes);
 }

@@ -6,7 +6,7 @@
 #    By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/02/16 19:36:03 by vkovsh            #+#    #+#              #
-#    Updated: 2018/03/15 18:31:42 by vkovsh           ###   ########.fr        #
+#    Updated: 2018/03/16 18:02:38 by vkovsh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,15 +35,22 @@ OBJ_NAME    +=  $(MACRO_NAME:.c=.o)
 
 OBJ_NAME    +=  $(PARSER_NAME:.c=.o)
 
-PARSER_NAME =   parse_specs.c			\
-				get_spec.c				\
-				set_flag1.c				\
-				set_width.c				\
-				set_precision.c			\
-				set_flag2.c				\
-				set_type.c				\
-				set_background.c		\
-				set_color.c
+PARSER_NAME =   parse_specs.c					\
+				get_spec.c						\
+				set_flag1.c						\
+				set_width.c						\
+				set_precision.c					\
+				set_flag2.c						\
+				set_type.c						\
+				set_background.c				\
+				set_color.c						\
+				set_plus_and_space_to_value.c	\
+				set_sharp_to_value.c			\
+				set_precision_to_value.c		\
+				set_precision_to_pointer.c		\
+				set_precision_to_numeric.c		\
+				set_precision_to_string.c		\
+				set_width_to_value.c
 
 MACRO_NAME  =   check_double_percent.c  \
                 fresh_value.c           \
@@ -66,7 +73,9 @@ MACRO_NAME  =   check_double_percent.c  \
 				join_s.c				\
 				join_percent.c			\
 				join_p.c				\
-				del_one.c
+				del_one.c				\
+				is_numeric_type.c		\
+				is_null_pointer.c
 
 SRC_NAME	=	ft_printf.c 			\
 				format_value.c 			\
