@@ -6,17 +6,18 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 17:48:32 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/15 19:08:33 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/17 18:01:31 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void join_null_symbol_minus_flag(t_pfargs *pf)
+static void		join_null_symbol_minus_flag(t_pfargs *pf)
 {
-	char 	*until;
-	int 	length;
-	int		null_pos;
+	char		*until;
+	int			length;
+	int			null_pos;
+	char		*new_out;
 
 	length = (int)ft_strlen(pf->output);
 	null_pos = length - pf->spec.width;
@@ -25,16 +26,16 @@ static void join_null_symbol_minus_flag(t_pfargs *pf)
 	ft_output(pf->fd, until, &(pf->length));
 	write(pf->fd, "\000", 1);
 	(pf->length)++;
-	char *new_out = ft_strnew(length - null_pos - 1);
+	new_out = ft_strnew(length - null_pos - 1);
 	ft_memmove(new_out, pf->output + null_pos + 1, length - null_pos - 1);
 	ft_strdel(&(pf->output));
 	ft_strdel(&until);
 	pf->output = new_out;
 }
 
-static void	join_null_symbol(t_pfargs *pf)
+static void		join_null_symbol(t_pfargs *pf)
 {
-	t_value	*element;
+	t_value		*element;
 
 	element = ((t_value *)((pf->t)->content));
 	element->value = init_min_str('*');
@@ -53,11 +54,11 @@ static void	join_null_symbol(t_pfargs *pf)
 	}
 }
 
-void		join_c(t_pfargs *pf)
+void			join_c(t_pfargs *pf)
 {
-	int		my_char;
-	t_value	*element;
-	
+	int			my_char;
+	t_value		*element;
+
 	my_char = va_arg(pf->argptr, int);
 	if (my_char)
 	{

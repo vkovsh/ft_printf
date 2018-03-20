@@ -36,15 +36,6 @@ static void		ft_ll(char **str, t_spec *spec)
 		spec->flag2 = l;
 }
 
-static void		ft_realloc(char *new, char **old)
-{
-	//char		*to_del;
-	
-	//to_del = *old;
-	*old = ft_strdup(new);
-	//ft_strdel(&to_del);
-}
-
 void			set_flag2(char **txt_pointer, t_spec *spec)
 {
 	char		*str;
@@ -66,6 +57,5 @@ void			set_flag2(char **txt_pointer, t_spec *spec)
 	}
 	else
 		spec->flag2 = IGNORE2;
-	if (*txt_pointer != str)
-		ft_realloc(str, txt_pointer);
+	*txt_pointer = str;
 }

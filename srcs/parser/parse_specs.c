@@ -6,7 +6,7 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/09 12:23:32 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/15 14:37:31 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/17 18:21:09 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,13 @@ static t_spec	get_safe_spec(char **spec_str)
 {
 	t_spec		spec;
 	char		*to_del;
-	char		*new_spec_str;
-	size_t		length;
 
 	to_del = *spec_str;
 	spec = get_spec(spec_str);
 	if (to_del != (*spec_str))
 	{
-		length = ft_strlen(*spec_str);
-		new_spec_str = ft_strnew(length);
-		ft_memmove(new_spec_str, *spec_str, length);
+		*spec_str = ft_strdup(*spec_str);
 		ft_strdel(&to_del);
-		*spec_str = new_spec_str;
 	}
 	return (spec);
 }
@@ -72,7 +67,7 @@ static void		safe_add_to_list(t_value sp,
 
 static void		delete_array(char **bytes)
 {
-	int 		i;
+	int			i;
 
 	i = -1;
 	while (bytes[++i])

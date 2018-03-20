@@ -6,7 +6,7 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 17:03:38 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/16 17:03:40 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/17 19:24:33 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static inline void	set_not_null_precision(char **value, t_spec spec)
 	char			*tmp;
 	int				k;
 
-	tmp = NULL;
 	if (spec.type == s)
 	{
 		if (spec.precision < (int)ft_strlen(*value))
@@ -42,14 +41,12 @@ static inline void	set_not_null_precision(char **value, t_spec spec)
 	}
 }
 
-void		set_precision_to_string(char **value, t_spec spec)
+void				set_precision_to_string(char **value, t_spec spec)
 {
-	char	*tmp;
+	char			*tmp;
 
 	if (spec.precision > 0)
-	{
 		set_not_null_precision(value, spec);
-	}
 	else if (spec.precision == 0 && spec.asterisk_precision)
 	{
 		ft_strdel(&(*value));
@@ -61,13 +58,8 @@ void		set_precision_to_string(char **value, t_spec spec)
 		{
 			tmp = *value;
 			if (tmp)
-			{
 				while (*tmp)
-				{
-					*tmp = ' ';
-					tmp++;
-				}
-			}
+					*tmp++ = ' ';
 		}
 		else
 		{

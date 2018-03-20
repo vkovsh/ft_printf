@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data_structs.h                                     :+:      :+:    :+:   */
+/*   datastructs.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/15 16:46:24 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/15 16:50:01 by vkovsh           ###   ########.fr       */
+/*   Created: 2018/03/17 14:57:32 by vkovsh            #+#    #+#             */
+/*   Updated: 2018/03/17 15:03:15 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DATA_STRUCTS_H
-#define DATA_STRUCTS_H
+#ifndef DATASTRUCTS_H
+# define DATASTRUCTS_H
 
 typedef enum		e_bool
 {
@@ -19,7 +19,7 @@ typedef enum		e_bool
 	TRUE
 }					t_bool;
 
-typedef enum 		e_flag1
+typedef enum		e_flag1
 {
 	IGNORE1 = 0,
 	SHARP = '#',
@@ -29,7 +29,7 @@ typedef enum 		e_flag1
 	SPACE = '\040'
 }					t_flag1;
 
-typedef enum 		e_flag2
+typedef enum		e_flag2
 {
 	IGNORE2 = 0,
 	hh = 'H',
@@ -40,10 +40,10 @@ typedef enum 		e_flag2
 	z = 'z'
 }					t_flag2;
 
-typedef enum 		e_type
+typedef enum		e_type
 {
 	none = 0,
-    r = 'r',
+	r = 'r',
 	s = 's',
 	S = 'S',
 	p = 'p',
@@ -65,34 +65,34 @@ typedef enum 		e_type
 	PERCENT = '\033'
 }					t_type;
 
-typedef struct  	s_color
+typedef struct		s_color
 {
-	unsigned char 	r;
-	unsigned char 	g;
-	unsigned char 	b;	
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
 }					t_color;
 
-typedef struct  	s_spec
+typedef struct		s_spec
 {
-	struct s_color 	color;
-	struct s_color 	background;
+	struct s_color	color;
+	struct s_color	background;
 	enum e_bool		sharp_flag;
 	enum e_bool		zero_flag;
 	enum e_bool		minus_flag;
 	enum e_bool		plus_flag;
 	enum e_bool		space_flag;
-	enum e_bool 	asterisk_width;
-	enum e_bool 	asterisk_precision;
-	enum e_bool 	asterisk_color;
-	enum e_bool 	asterisk_background;
+	enum e_bool		asterisk_width;
+	enum e_bool		asterisk_precision;
+	enum e_bool		asterisk_color;
+	enum e_bool		asterisk_background;
 	int				width;
 	int				precision;
-	enum e_flag2	flag2;	
+	enum e_flag2	flag2;
 	enum e_type		type;
-    char            next_char;
+	char			next_char;
 }					t_spec;
 
-typedef struct  	s_value
+typedef struct		s_value
 {
 	struct s_spec	spec;
 	void			*value;
@@ -104,7 +104,7 @@ typedef struct		s_pfargs
 	struct s_list	*t;
 	char			*output;
 	int				length;
-    int             fd;
+	int				fd;
 	struct s_spec	spec;
 }					t_pfargs;
 #endif

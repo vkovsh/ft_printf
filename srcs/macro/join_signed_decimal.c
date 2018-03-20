@@ -6,7 +6,7 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/06 14:57:51 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/15 17:38:40 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/17 18:03:41 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 
 void					join_signed_decimal(t_pfargs *pf)
 {
-	long long int 		v;
+	long long int		v;
 	t_flag2				f2;
 	t_type				t;
 
 	v = va_arg(pf->argptr, long long int);
 	f2 = pf->spec.flag2;
 	t = pf->spec.type;
-	if (t != D && (f2 == h || f2 == l || f2 == ll || f2 == j || f2 == z || f2 == hh))
+	if (t != D && (f2 == h || f2 == l || f2 == ll ||
+				f2 == j || f2 == z || f2 == hh))
 	{
-        if (f2 == hh)
-            v = (signed char)v;
+		if (f2 == hh)
+			v = (signed char)v;
 		else if (f2 == h)
 			v = (short int)v;
 		else if (f2 == l)

@@ -6,7 +6,7 @@
 /*   By: vkovsh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 16:09:35 by vkovsh            #+#    #+#             */
-/*   Updated: 2018/03/16 16:09:37 by vkovsh           ###   ########.fr       */
+/*   Updated: 2018/03/17 19:04:05 by vkovsh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void				set_precision_to_pointer(char **value, t_spec spec)
 {
 	char			*zeros;
 	char			*to_del;
-	int 			p_len;
+	int				p_len;
 
 	if (is_null_pointer(*value))
 		set_precision_to_null(value, spec);
